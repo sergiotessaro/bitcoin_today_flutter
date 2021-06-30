@@ -1,16 +1,18 @@
 # bitcoin_today
 
-A new Flutter project.
+This is the new version of Bitcoin Today, migrated to Flutter 2.0 and clean architecture.
 
-## Getting Started
+## Used Technologies
 
-This project is a starting point for a Flutter application.
+ - Flutter
+ - API by coindesk
 
-A few resources to get you started if this is your first Flutter project:
+## API
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+This is the API used in the project:
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+https://www.coindesk.com/coindesk-api
+
+## How to install:
+
+The app is not FINISHED yet, so it is not available on PlayStore or AppStore.
