@@ -4,7 +4,7 @@ This is the new version of Bitcoin Today, migrated to Flutter 2.0 and clean arch
 
 ## Used Technologies
 
- - Flutter
+ - Flutter / Dart
  - API by coindesk
 
 ## API
