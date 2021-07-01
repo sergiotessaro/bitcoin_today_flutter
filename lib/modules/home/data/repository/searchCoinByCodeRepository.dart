@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:bitcoin_today/modules/home/domain/model/coinDetails.dart';
+import 'package:bitcoin_today/modules/home/domain/model/receiver.dart';
 import 'package:dio/dio.dart';
 
 abstract class SearchCoinByCodeRepository {
-  Future<Bpi> call(String code);
+  Future<Receiver> call(String code);
 }
 
 class SearchCoinByCodeRepositoryImpl implements SearchCoinByCodeRepository{
@@ -11,17 +14,19 @@ class SearchCoinByCodeRepositoryImpl implements SearchCoinByCodeRepository{
   SearchCoinByCodeRepositoryImpl(this.dio);
 
   @override
-  Future<Bpi> call(String code) async {
+  Future<Receiver> call(String code) async {
     try {
       Response response = await dio.get(
-        'currentprice/${code.toUpperCase()}.json',
+        'https://api.coindesk.com/v1/bpi/currentprice/$code.json',
         options: Options(headers: {
-          "Content-Type": "application/json; charset=utf-8",
+          Headers.contentTypeHeader: "application/json",
         }, responseType: ResponseType.json),
       );
+      print(response.data["bpi"]);
 
-      return response.data["bpi"].map<Bpi>((bpi) => Bpi.fromJson(bpi));
+      return response.data.map<Receiver>((r) => Receiver.fromJson(r));
     } catch (e) {
+      print(e);
       throw e;
     }
   }
