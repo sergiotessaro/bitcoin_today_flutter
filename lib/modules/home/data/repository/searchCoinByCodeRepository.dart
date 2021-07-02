@@ -20,11 +20,11 @@ class SearchCoinByCodeRepositoryImpl implements SearchCoinByCodeRepository{
         'https://api.coindesk.com/v1/bpi/currentprice/$code.json',
         options: Options(headers: {
           Headers.contentTypeHeader: "application/json",
-        }, responseType: ResponseType.json),
+        }, responseType: ResponseType.plain),
       );
-      print(response.data["bpi"]);
+     
 
-      return response.data.map<Receiver>((r) => Receiver.fromJson(r));
+      return Receiver.fromJson(response.data);
     } catch (e) {
       print(e);
       throw e;
