@@ -1,9 +1,10 @@
 import 'dart:convert';
 
+import 'package:bitcoin_today/modules/home/domain/model/coinCodes.dart';
 import 'package:dio/dio.dart';
 
 abstract class SearchCoinCodesRepository {
-  Future<List<dynamic>> call();
+  Future<List<CoinCodes>> call();
 }
 
 class SearchCoinCodesRepositoryImpl implements SearchCoinCodesRepository {
@@ -12,7 +13,7 @@ class SearchCoinCodesRepositoryImpl implements SearchCoinCodesRepository {
   SearchCoinCodesRepositoryImpl(this.dio);
 
   @override
-  Future<List<dynamic>> call() async {
+  Future<List<CoinCodes>> call() async {
     try {
       Response response = await dio.get(
         'https://api.coindesk.com/v1/bpi/supported-currencies.json',
@@ -20,8 +21,11 @@ class SearchCoinCodesRepositoryImpl implements SearchCoinCodesRepository {
           "Content-Type": "application/json; charset=utf-8",
         }, responseType: ResponseType.json),
       );
-      print(response);
-      return json.decode(response.data);
+
+      return json
+          .decode(response.data)
+          .map<CoinCodes>((coinCode) => CoinCodes.fromJson(coinCode))
+          .toList();
     } catch (e) {
       throw e;
     }
