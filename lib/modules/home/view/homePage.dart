@@ -1,6 +1,5 @@
 import 'package:bitcoin_today/di/di.dart';
 import 'package:flutter/material.dart';
-
 import 'package:bitcoin_today/modules/home/controller/homeController.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -68,70 +67,68 @@ class HomePage extends StatelessWidget {
                                               SliverGridDelegateWithFixedCrossAxisCount(
                                                   crossAxisCount: 1),
                                           children: [
-                                            Expanded(
-                                              child: Card(
-                                                  child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          'BTC Value',
-                                                          style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              fontSize: 18),
-                                                        )
-                                                      ],
+                                            Card(
+                                                elevation: 3,
+                                                shadowColor: Colors.black,
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text('BTC Value',
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  fontSize: 18))
+                                                        ],
+                                                      ),
                                                     ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Text(
-                                                          '\$${controller!.receiver.bpi!.values.last.rate}',
-                                                          style: TextStyle(
-                                                              fontSize: 30),
-                                                        ),
-                                                      ],
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Text(
+                                                            '\$${double.parse(controller!.receiver.bpi!.values.last.rate!.split(",").join("")).toStringAsFixed(2)}',
+                                                            style: TextStyle(
+                                                                fontSize: 30),
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Text(
-                                                            '${DateTime.now().toString().split('.')[0]}')
-                                                      ],
-                                                    ),
-                                                  )
-                                                ],
-                                              )),
-                                            ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Text(
+                                                              '${DateTime.now().toString().split('.')[0]}')
+                                                        ],
+                                                      ),
+                                                    )
+                                                  ],
+                                                )),
                                           ],
                                         ),
                                       )
@@ -174,7 +171,7 @@ class HomePage extends StatelessWidget {
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20.0)))),
                     onPressed: () {
-                      Navigator.pop(context);
+                      controller!.search();
                       // Navigator.push(context, MaterialPageRoute(builder: (context) => Index()));
                     },
                     child: Text(

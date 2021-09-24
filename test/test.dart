@@ -1,57 +1,58 @@
-// // This is a basic Flutter widget test.
-// //
-// // To perform an interaction with a widget in your test, use the WidgetTester
-// // utility that Flutter provides. For example, you can send tap and scroll
-// // gestures. You can also use WidgetTester to find child widgets in the widget
-// // tree, read text, and verify that the values of widget properties are correct.
+import 'package:bitcoin_today/modules/home/data/repository/searchCoinByCodeRepository.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
 
-// import 'dart:convert';
-// import 'package:bitcoin_today/di/di.dart';
-// import 'package:bitcoin_today/modules/home/data/repository/searchCoinByCodeRepository.dart';
-// import 'package:bitcoin_today/modules/home/domain/model/coinDetails.dart';
-// import 'package:dio/dio.dart';
-// import 'package:flutter_test/flutter_test.dart';
-// import 'package:mockito/annotations.dart';
-// import 'package:mockito/mockito.dart';
+class DioAdapterMock extends Mock implements Dio {}
 
+void main() async {
+  group('UserRemoteDataSource', () {
+    SearchCoinByCodeRepository? searchCoinByCodeRepository;
+    DioAdapterMock? dioAdapterMock;
+    final dio = DioAdapterMock();
 
-// class DioMock extends Mock implements Dio {
-// }
+    setUp(() {
+      dioAdapterMock = DioAdapterMock();
+      searchCoinByCodeRepository = SearchCoinByCodeRepositoryImpl(dio);
+    });
 
-// void main() {
-//   test('test coin search repository', () async {
-//     final dio = DioMock();
-//     final searchCoinByCodeRepository = SearchCoinByCodeRepositoryImpl(dio);
+    group('login', () {
+      test('test coin search repository', () async {
+        String code = "BRL";
 
-//     when(dio.get("currentprice/BRL.json")).thenAnswer((_) async => Response(
-//         statusCode: 200,
-//         data: {
-//           "time": {
-//             "updated": "Jul 1, 2021 13:27:00 UTC",
-//             "updatedISO": "2021-07-01T13:27:00+00:00",
-//             "updateduk": "Jul 1, 2021 at 14:27 BST"
-//           },
-//           "disclaimer":
-//               "This data was produced from the CoinDesk Bitcoin Price Index (USD). Non-USD currency data converted using hourly conversion rate from openexchangerates.org",
-//           "bpi": {
-//             "USD": {
-//               "code": "USD",
-//               "rate": "33,718.2517",
-//               "description": "United States Dollar",
-//               "rate_float": 33718.2517
-//             },
-//             "BRL": {
-//               "code": "BRL",
-//               "rate": "167,232.4162",
-//               "description": "Brazilian Real",
-//               "rate_float": 167232.4162
-//             }
-//           }
-//         },
-//         requestOptions:
-//             RequestOptions(path: "https://api.coindesk.com/v1/bpi/")));
-
-//     final receiver = await searchCoinByCodeRepository("BRL");
-//     expect(receiver.bpi!["BRL"]!.code, "BRL");
-//   });
-// }
+        when(dioAdapterMock!
+                .get("https://api.coindesk.com/v1/bpi/currentprice/$code.json"))
+            .thenAnswer((_) async => Response(
+                    statusCode: 200,
+                    requestOptions: RequestOptions(
+                        path:
+                            "https://api.coindesk.com/v1/bpi/currentprice/$code.json"),
+                    data: {
+                      "time": {
+                        "updated": "Jul 1, 2021 13:27:00 UTC",
+                        "updatedISO": "2021-07-01T13:27:00+00:00",
+                        "updateduk": "Jul 1, 2021 at 14:27 BST"
+                      },
+                      "disclaimer":
+                          "This data was produced from the CoinDesk Bitcoin Price Index (USD). Non-USD currency data converted using hourly conversion rate from openexchangerates.org",
+                      "bpi": {
+                        "USD": {
+                          "code": "USD",
+                          "rate": "33,718.2517",
+                          "description": "United States Dollar",
+                          "rate_float": 33718.2517
+                        },
+                        "BRL": {
+                          "code": "BRL",
+                          "rate": "167,232.4162",
+                          "description": "Brazilian Real",
+                          "rate_float": 167232.4162
+                        }
+                      }
+                    }));
+        final receiver = await searchCoinByCodeRepository!(code);
+        expect(receiver.bpi!["BRL"]!.code, "BRL");
+      });
+    });
+  });
+}

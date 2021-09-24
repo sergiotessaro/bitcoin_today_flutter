@@ -16,6 +16,21 @@ mixin _$HomeController on _HomeControllerBase, Store {
           name: '_HomeControllerBase.loading'))
       .value;
 
+  final _$codeAtom = Atom(name: '_HomeControllerBase.code');
+
+  @override
+  String get code {
+    _$codeAtom.reportRead();
+    return super.code;
+  }
+
+  @override
+  set code(String value) {
+    _$codeAtom.reportWrite(value, super.code, () {
+      super.code = value;
+    });
+  }
+
   final _$_loadingAtom = Atom(name: '_HomeControllerBase._loading');
 
   @override
@@ -63,6 +78,7 @@ mixin _$HomeController on _HomeControllerBase, Store {
   @override
   String toString() {
     return '''
+code: ${code},
 receiver: ${receiver},
 loading: ${loading}
     ''';
