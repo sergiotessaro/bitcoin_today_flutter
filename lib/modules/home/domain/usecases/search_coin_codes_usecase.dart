@@ -1,20 +1,16 @@
-// import 'package:bitcoin_today/modules/home/data/datasources/search_coin_codes_repository.dart';
+import '../../data/data.dart';
 
-// abstract class SearchCoinCodesUseCase {
-//   Future<List<dynamic>> call();
-// }
+abstract class ISearchCoinCodesUseCase {
+  Future<List<dynamic>> call();
+}
 
-// class SearchCoinCodesUseCaseImpl implements SearchCoinCodesUseCase {
-//   final SearchCoinCodesDatasource searchCoinCodesDatasource;
+class SearchCoinCodesUseCase implements ISearchCoinCodesUseCase {
+  final SearchCoinDatasource searchCoinDatasource;
 
-//   SearchCoinCodesUseCaseImpl(this.searchCoinCodesDatasource);
+  SearchCoinCodesUseCase(this.searchCoinDatasource);
 
-//   @override
-//   Future<List<dynamic>> call() async {
-//     try {
-//       return await searchCoinCodesRepository();
-//     } catch (e) {
-//       throw e;
-//     }
-//   }
-// }
+  @override
+  Future<List<dynamic>> call() async {
+    return await searchCoinDatasource.searchCoinCodes();
+  }
+}

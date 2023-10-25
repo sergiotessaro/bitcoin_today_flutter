@@ -9,13 +9,6 @@ part of 'home_page_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$HomeController on _HomeControllerBase, Store {
-  Computed<bool>? _$loadingComputed;
-
-  @override
-  bool get loading => (_$loadingComputed ??= Computed<bool>(() => super.loading,
-          name: '_HomeControllerBase.loading'))
-      .value;
-
   late final _$codeAtom =
       Atom(name: '_HomeControllerBase.code', context: context);
 
@@ -32,19 +25,19 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
-  late final _$_loadingAtom =
-      Atom(name: '_HomeControllerBase._loading', context: context);
+  late final _$loadingAtom =
+      Atom(name: '_HomeControllerBase.loading', context: context);
 
   @override
-  bool get _loading {
-    _$_loadingAtom.reportRead();
-    return super._loading;
+  bool get loading {
+    _$loadingAtom.reportRead();
+    return super.loading;
   }
 
   @override
-  set _loading(bool value) {
-    _$_loadingAtom.reportWrite(value, super._loading, () {
-      super._loading = value;
+  set loading(bool value) {
+    _$loadingAtom.reportWrite(value, super.loading, () {
+      super.loading = value;
     });
   }
 
@@ -92,8 +85,8 @@ mixin _$HomeController on _HomeControllerBase, Store {
   String toString() {
     return '''
 code: ${code},
-receiver: ${receiver},
-loading: ${loading}
+loading: ${loading},
+receiver: ${receiver}
     ''';
   }
 }

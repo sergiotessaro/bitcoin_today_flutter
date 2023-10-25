@@ -7,11 +7,22 @@ import '../../modules.dart';
 class AppModule extends Module {
   @override
   void binds(i) {
-    i.addInstance(Dio());
+    i.add(() {
+      final dio = Dio(BaseOptions());
+
+      dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
+
+      return dio;
+    });
     //repository
-    i.addInstance(SearchCoinRepository(i.get()));
+    i.add(SearchCoinRepository.new);
     //datasource
-    i.addInstance(SearchCoinDatasource(i.get()));
+    i.addSingleton(SearchCoinDatasource.new);
+    //usecases
+    i.add(SearchCoinCodesUseCase.new);
+    i.add(SearchCoinByCodeUseCase.new);
+    //controller
+    i.add(HomeController.new);
   }
 
   @override

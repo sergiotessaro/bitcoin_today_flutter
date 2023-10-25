@@ -1,22 +1,18 @@
-// import 'package:bitcoin_today/modules/home/data/datasources/search_coin_by_code_repository.dart';
-// import 'package:bitcoin_today/modules/home/data/model/receiver_model.dart';
+import 'package:bitcoin_today/modules/home/data/model/receiver_model.dart';
 
-// abstract class SearchCoinUseCase {
-//   Future<ReceiverModel> call(String code);
-// }
+import '../../home.dart';
 
-// class SearchCoinUseCaseImpl implements SearchCoinUseCase {
-//   final SearchCoinByCodeDatasource searchCoinByCodeDatasource;
+abstract class ISearchCoinUseCase {
+  Future<ReceiverModel> call(String code);
+}
 
-//   SearchCoinUseCaseImpl(this.searchCoinByCodeDatasource);
+class SearchCoinByCodeUseCase implements ISearchCoinUseCase {
+  final SearchCoinDatasource searchCoinDatasource;
 
-//   @override
-//   Future<ReceiverModel> call(String code) async {
-//     try {
-      
-//       return await this.searchCoinByCodeRepository(code);
-//     } catch (e) {
-//       throw e;
-//     }
-//   }
-// }
+  SearchCoinByCodeUseCase(this.searchCoinDatasource);
+
+  @override
+  Future<ReceiverModel> call(String code) async {
+    return await searchCoinDatasource.searchCoinByCode(code: code);
+  }
+}

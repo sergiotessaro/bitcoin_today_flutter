@@ -1,45 +1,44 @@
 import 'package:bitcoin_today/modules/home/data/model/receiver_model.dart';
 import 'package:mobx/mobx.dart';
 
+import '../../domain/domain.dart';
+
 part 'home_page_controller.g.dart';
 
 class HomeController extends _HomeControllerBase with _$HomeController {
-  // final SearchCoinUseCase searchCoinUseCase;
-  // final SearchCoinCodesUseCase searchCoinCodesUseCase;
+  final SearchCoinByCodeUseCase searchCoinByCodeUseCase;
+  final SearchCoinCodesUseCase searchCoinCodesUseCase;
 
-  // HomeController(this.searchCoinUseCase, this.searchCoinCodesUseCase) {
-  //   // super.searchCoinUseCase = searchCoinUseCase;
-  //   // super.searchCoinCodesUseCase = searchCoinCodesUseCase;
-  // }
+  HomeController(this.searchCoinByCodeUseCase, this.searchCoinCodesUseCase) {
+    super.searchCoinCodesUseCase = searchCoinCodesUseCase;
+    super.searchCoinByCodeUseCase = searchCoinByCodeUseCase;
+  }
 }
 
 abstract class _HomeControllerBase with Store {
-  // late SearchCoinUseCase searchCoinUseCase;
-  // late SearchCoinCodesUseCase searchCoinCodesUseCase;
+  late SearchCoinByCodeUseCase searchCoinByCodeUseCase;
+  late SearchCoinCodesUseCase searchCoinCodesUseCase;
+
+  @action
+  mounted() async {
+    this.loading = true;
+    try {
+      this.receiver = await searchCoinByCodeUseCase(this.code);
+    } catch (e) {
+      throw e;
+    } finally {
+      this.loading = false;
+    }
+  }
 
   @observable
   String code = "USD";
 
   @observable
-  bool _loading = false;
-
-  @computed
-  bool get loading => this._loading;
+  bool loading = false;
 
   @observable
   ReceiverModel receiver = ReceiverModel();
-
-  @action
-  mounted() async {
-    this._loading = true;
-    try {
-      // this.receiver = await searchCoinUseCase(this.code);
-    } catch (e) {
-      throw e;
-    } finally {
-      this._loading = false;
-    }
-  }
 
   @action
   update() async {
@@ -48,6 +47,6 @@ abstract class _HomeControllerBase with Store {
 
   @action
   search() async {
-    // await searchCoinCodesUseCase();
+    await searchCoinCodesUseCase();
   }
 }
