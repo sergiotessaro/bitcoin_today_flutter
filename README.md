@@ -1,11 +1,13 @@
 # bitcoin_today
 
-This is the new version of Bitcoin Today, migrated to Flutter 2.0 and clean architecture.
+This is the new version of Bitcoin Today, migrated to Flutter 3.0 and clean architecture.
 
 ## Used Technologies
 
  - Flutter / Dart
  - API by coindesk
+ - Dependecy Injection (Flutter Modular)
+ - MobX
 
 ## API
 
