@@ -1,18 +1,19 @@
-import 'package:bitcoin_today/modules/home/data/model/receiver_model.dart';
+import 'package:dartz/dartz.dart';
 
+import '../../../app/app.dart';
 import '../../home.dart';
 
-abstract class ISearchCoinUseCase {
-  Future<ReceiverModel> call(String code);
+abstract class ISearchCoinByCodeUseCase {
+  Future<Either<Failure, ReceiverModel>> call(String code);
 }
 
-class SearchCoinByCodeUseCase implements ISearchCoinUseCase {
-  final SearchCoinDatasource searchCoinDatasource;
+class SearchCoinByCodeUseCase implements ISearchCoinByCodeUseCase {
+  final SearchCoinRepository searchCoinRepository;
 
-  SearchCoinByCodeUseCase(this.searchCoinDatasource);
+  SearchCoinByCodeUseCase(this.searchCoinRepository);
 
   @override
-  Future<ReceiverModel> call(String code) async {
-    return await searchCoinDatasource.searchCoinByCode(code: code);
+  Future<Either<Failure, ReceiverModel>> call(String code) async {
+    return await searchCoinRepository.searchCoinByCode(code: code);
   }
 }

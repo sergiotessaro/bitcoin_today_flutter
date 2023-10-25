@@ -1,10 +1,9 @@
 import 'dart:async';
 
-import 'package:bitcoin_today/modules/home/data/model/coin_codes_model.dart';
-import 'package:bitcoin_today/modules/home/data/model/receiver_model.dart';
 import 'package:bitcoin_today/modules/home/domain/domain.dart';
 import 'package:dartz/dartz.dart';
 
+import '../../../app/app.dart';
 import '../data.dart';
 
 class SearchCoinRepository implements ISearchCoinRepository {
@@ -25,8 +24,14 @@ class SearchCoinRepository implements ISearchCoinRepository {
   }
 
   @override
-  Future<Either<Failure, List<CoinCodesModel>>> searchCoinCodes() {
-    // TODO: implement searchCoinCodes
-    throw UnimplementedError();
+  Future<Either<Failure, List<CoinCodesModel>>> searchCoinCodes() async {
+    try {
+      final response = await _searchCoinDatasource.searchCoinCodes();
+      return Right(response);
+    } on TimeoutException {
+      return Left(Failure.timeout());
+    } catch (e) {
+      return Left(Failure.serverError());
+    }
   }
 }

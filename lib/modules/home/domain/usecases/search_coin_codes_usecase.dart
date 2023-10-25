@@ -1,16 +1,19 @@
+import 'package:dartz/dartz.dart';
+
+import '../../../app/app.dart';
 import '../../data/data.dart';
 
 abstract class ISearchCoinCodesUseCase {
-  Future<List<dynamic>> call();
+  Future<Either<Failure, List<dynamic>>> call();
 }
 
 class SearchCoinCodesUseCase implements ISearchCoinCodesUseCase {
-  final SearchCoinDatasource searchCoinDatasource;
+  final SearchCoinRepository searchCoinRepository;
 
-  SearchCoinCodesUseCase(this.searchCoinDatasource);
+  SearchCoinCodesUseCase(this.searchCoinRepository);
 
   @override
-  Future<List<dynamic>> call() async {
-    return await searchCoinDatasource.searchCoinCodes();
+  Future<Either<Failure, List<dynamic>>> call() async {
+    return await searchCoinRepository.searchCoinCodes();
   }
 }

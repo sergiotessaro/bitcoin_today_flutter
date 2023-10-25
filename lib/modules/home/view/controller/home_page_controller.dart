@@ -22,13 +22,15 @@ abstract class _HomeControllerBase with Store {
   @action
   mounted() async {
     this.loading = true;
-    try {
-      this.receiver = await searchCoinByCodeUseCase(this.code);
-    } catch (e) {
-      throw e;
-    } finally {
-      this.loading = false;
-    }
+    final response = await searchCoinByCodeUseCase(this.code);
+
+    response.fold((error) {
+      print(error);
+    }, (receiver) {
+      this.receiver = receiver;
+    });
+
+    this.loading = false;
   }
 
   @observable

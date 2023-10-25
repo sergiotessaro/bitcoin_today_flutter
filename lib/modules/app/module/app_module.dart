@@ -1,4 +1,3 @@
-import 'package:bitcoin_today/modules/home/data/repositories/search_coin_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -17,7 +16,7 @@ class AppModule extends Module {
     //repository
     i.add(SearchCoinRepository.new);
     //datasource
-    i.addSingleton(SearchCoinDatasource.new);
+    i.add<ISearchCoinDatasource>(SearchCoinDatasource.new);
     //usecases
     i.add(SearchCoinCodesUseCase.new);
     i.add(SearchCoinByCodeUseCase.new);
