@@ -1,8 +1,8 @@
-import 'package:bitcoin_today/modules/home/domain/model/coinDetails.dart';
-import 'package:bitcoin_today/modules/home/domain/model/time.dart';
+import 'package:bitcoin_today/modules/home/data/model/coin_details_model.dart';
+import 'package:bitcoin_today/modules/home/data/model/time_model.dart';
 
-class Receiver {
-    Receiver({
+class ReceiverModel {
+    ReceiverModel({
         this.time,
         this.disclaimer,
         this.bpi,
@@ -10,12 +10,12 @@ class Receiver {
 
     Time? time;
     String? disclaimer;
-    Map<String, Bpi>? bpi;
+    Map<String, BpiModel>? bpi;
 
-    factory Receiver.fromJson(Map<String, dynamic> json) => Receiver(
+    factory ReceiverModel.fromJson(Map<String, dynamic> json) => ReceiverModel(
         time: json["time"] == null ? null : Time.fromJson(json["time"]),
         disclaimer: json["disclaimer"] == null ? null : json["disclaimer"],
-        bpi: json["bpi"] == null ? null : Map.from(json["bpi"]).map((k, v) => MapEntry<String, Bpi>(k, Bpi.fromJson(v))),
+        bpi: json["bpi"] == null ? null : Map.from(json["bpi"]).map((k, v) => MapEntry<String, BpiModel>(k, BpiModel.fromJson(v))),
     );
 
     Map<String, dynamic> toJson() => {

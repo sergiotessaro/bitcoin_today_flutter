@@ -1,7 +1,7 @@
-import 'package:bitcoin_today/di/di.dart';
 import 'package:flutter/material.dart';
-import 'package:bitcoin_today/modules/home/controller/homeController.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+
+import '../controller/home_page_controller.dart';
 
 HomeController? controller;
 
@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (controller == null) {
-      controller = homeController(context);
+      // controller = homeController(context);
       controller!.mounted();
     }
     return WillPopScope(
@@ -47,14 +47,11 @@ class HomePage extends StatelessWidget {
                                 ? Column(
                                     children: [
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Text(
                                             '${controller!.receiver.bpi!.values.last.code}',
-                                            style: TextStyle(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.bold),
+                                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                                           )
                                         ],
                                       ),
@@ -63,68 +60,39 @@ class HomePage extends StatelessWidget {
                                         child: GridView(
                                           scrollDirection: Axis.vertical,
                                           shrinkWrap: true,
-                                          gridDelegate:
-                                              SliverGridDelegateWithFixedCrossAxisCount(
-                                                  crossAxisCount: 1),
+                                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1),
                                           children: [
                                             Card(
                                                 elevation: 3,
                                                 shadowColor: Colors.black,
                                                 child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                   children: [
                                                     Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
+                                                      padding: const EdgeInsets.all(8.0),
                                                       child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text('BTC Value',
-                                                              style: TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  fontSize: 18))
-                                                        ],
+                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                        children: [Text('BTC Value', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18))],
                                                       ),
                                                     ),
                                                     Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
+                                                      padding: const EdgeInsets.all(8.0),
                                                       child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
+                                                        mainAxisAlignment: MainAxisAlignment.center,
                                                         children: [
                                                           Text(
-                                                            '\$${double.parse(controller!.receiver.bpi!.values.last.rate!.split(",").join("")).toStringAsFixed(2)}',
-                                                            style: TextStyle(
-                                                                fontSize: 30),
+                                                            '\$ ${double.parse(controller!.receiver.bpi!.values.last.rate!.split(",").join("")).toStringAsFixed(2)}',
+                                                            style: TextStyle(fontSize: 30),
                                                           ),
                                                         ],
                                                       ),
                                                     ),
                                                     Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
+                                                      padding: const EdgeInsets.all(8.0),
                                                       child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Text(
-                                                              '${DateTime.now().toString().split('.')[0]}')
-                                                        ],
+                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                        children: [Text('${DateTime.now().toString().split('.')[0]}')],
                                                       ),
                                                     )
                                                   ],
@@ -155,21 +123,13 @@ class HomePage extends StatelessWidget {
                       'Refresh',
                       style: TextStyle(fontSize: 15, color: Colors.white),
                     ),
-                    style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.orange),
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0)))),
+                    style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.orange), shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)))),
                     onPressed: () {
                       controller!.update();
                     },
                   ),
                   ElevatedButton(
-                    style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.orange),
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0)))),
+                    style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.orange), shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)))),
                     onPressed: () {
                       controller!.search();
                       // Navigator.push(context, MaterialPageRoute(builder: (context) => Index()));

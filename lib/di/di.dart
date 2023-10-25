@@ -1,22 +1,21 @@
-import 'package:bitcoin_today/modules/home/controller/homeController.dart';
-import 'package:bitcoin_today/modules/home/data/repository/searchCoinByCodeRepository.dart';
-import 'package:bitcoin_today/modules/home/data/repository/searchCoinCodesRepository.dart';
-import 'package:bitcoin_today/modules/home/domain/usecase/searchCoinCodesUseCase.dart';
-import 'package:bitcoin_today/modules/home/domain/usecase/searchCoinUseCase.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
+// import 'package:bitcoin_today/modules/home/data/datasources/search_coin_by_code_repository.dart';
+// import 'package:bitcoin_today/modules/home/data/datasources/search_coin_codes_repository.dart';
+// import 'package:bitcoin_today/modules/home/domain/usecases/search_coin_codes_usecase.dart';
+// import 'package:bitcoin_today/modules/home/domain/usecases/search_coin_usecase.dart';
+// import 'package:dio/dio.dart';
+// import 'package:flutter/material.dart';
 
-final dio = Dio();
+// import '../modules/home/view/controller/home_page_controller.dart';
 
-//external repository
-final searchCoinByCodeRepository = SearchCoinByCodeRepositoryImpl(dio);
-final searchCoinCodesRepository = SearchCoinCodesRepositoryImpl(dio);
+// final dio = Dio();
 
-//usecase
-final searchCoinUseCase = SearchCoinUseCaseImpl(searchCoinByCodeRepository);
-final searchCoinCodesUseCase =
-    SearchCoinCodesUseCaseImpl(searchCoinCodesRepository);
+// //external repository
+// final searchCoinByCodeRepository = SearchCoinByCodeRepositoryImpl(dio);
+// final searchCoinCodesRepository = SearchCoinCodesRepositoryImpl(dio);
 
-//controller
-final homeController =
-    (BuildContext context) => HomeController(context, searchCoinUseCase, searchCoinCodesUseCase);
+// //usecase
+// final searchCoinUseCase = SearchCoinUseCaseImpl(searchCoinByCodeRepository);
+// final searchCoinCodesUseCase = SearchCoinCodesUseCaseImpl(searchCoinCodesRepository);
+
+// //controller
+// final homeController = (BuildContext context) => HomeController(searchCoinUseCase, searchCoinCodesUseCase);

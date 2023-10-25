@@ -1,4 +1,4 @@
-import 'package:bitcoin_today/modules/home/data/repository/searchCoinByCodeRepository.dart';
+import 'package:bitcoin_today/modules/home/data/datasources/search_coin_datasource.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';

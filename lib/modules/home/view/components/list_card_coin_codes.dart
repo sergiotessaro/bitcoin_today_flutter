@@ -1,8 +1,8 @@
-import 'package:bitcoin_today/modules/home/domain/model/coinCodes.dart';
+import 'package:bitcoin_today/modules/home/data/model/coin_codes_model.dart';
 import 'package:flutter/material.dart';
 
 class ListCardCoinCodesComponent extends StatelessWidget {
-  final List<CoinCodes> coins;
+  final List<CoinCodesModel> coins;
 
   ListCardCoinCodesComponent({required this.coins});
 

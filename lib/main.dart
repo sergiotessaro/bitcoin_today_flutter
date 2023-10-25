@@ -1,15 +1,17 @@
-import 'package:bitcoin_today/modules/home/view/homePage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
-void main() {
-  runApp(MyApp());
+import 'modules/modules.dart';
+
+void main(){
+  return runApp(ModularApp(module: AppModule(), child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: HomePage(),
+    return MaterialApp.router(
+      routerConfig: Modular.routerConfig,
       debugShowCheckedModeBanner: false,
     );
   }

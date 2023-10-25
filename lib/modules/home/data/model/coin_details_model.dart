@@ -1,5 +1,5 @@
-class Bpi {
-    Bpi({
+class BpiModel {
+    BpiModel({
         this.code,
         this.rate,
         this.description,
@@ -11,7 +11,7 @@ class Bpi {
     String? description;
     double? rateFloat;
 
-    factory Bpi.fromJson(Map<String, dynamic> json) => Bpi(
+    factory BpiModel.fromJson(Map<String, dynamic> json) => BpiModel(
         code: json["code"] == null ? null : json["code"],
         rate: json["rate"] == null ? null : json["rate"],
         description: json["description"] == null ? null : json["description"],
